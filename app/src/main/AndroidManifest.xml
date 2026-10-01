@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Necessária apenas para endpoint remoto opcional. POST_NOTIFICATIONS foi removida: será pedida quando tarefas agendadas existirem. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- allowBackup=false: banco, conversas, memórias e segredos NÃO vão para backup em nuvem/adb. -->
+    <application
+        android:icon="@drawable/ic_aurora"
+        android:roundIcon="@drawable/ic_aurora"
+        android:name=".AuroraApplication"
+        android:theme="@style/Theme.Aurora"
+        android:label="Aurora 9.0"
+        android:allowBackup="false"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:supportsRtl="true">
+        <activity android:name=".MainActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

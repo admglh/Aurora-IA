@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(aurora_native)
+set(CMAKE_CXX_STANDARD 17)
+add_library(aurora_native SHARED aurora_native.cpp)
+find_library(log-lib log)
+find_library(android-lib android)
+target_link_libraries(aurora_native ${log-lib} ${android-lib})

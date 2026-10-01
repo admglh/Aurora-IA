@@ -1,0 +1,61 @@
+{
+ "versao": 1,
+ "itens": [
+  {
+   "id": "0a2cbd5b",
+   "texto": "O nome dele é Guilherme Santos Soares; pode chamá-lo de Gui (também atende por Fofinho, Guigo e Magic Mike).",
+   "tipo": "perfil",
+   "criado_em": 1790724132.5509472,
+   "atualizado_em": 1790724132.5509472
+  },
+  {
+   "id": "b7407876",
+   "texto": "Tem formação técnica em Química (CRQ ativo) e quer concluir a licenciatura em Química.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.5516148,
+   "atualizado_em": 1790724132.5516148
+  },
+  {
+   "id": "62b96441",
+   "texto": "Tem interesse em investigação e perícia criminal.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.552824,
+   "atualizado_em": 1790724132.552824
+  },
+  {
+   "id": "f8ee8fce",
+   "texto": "Gosta de cozinhar, cantar, música (rock antigo e atual), desenho, criar histórias, mangás e animes.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.5540009,
+   "atualizado_em": 1790724132.5540009
+  },
+  {
+   "id": "44f5a2bd",
+   "texto": "Gosta de Bíblia, Jesus, vídeos filosóficos, mistérios, casos policiais, suspense, romance, ação e comédia.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.5559554,
+   "atualizado_em": 1790724132.5559554
+  },
+  {
+   "id": "db5f3e63",
+   "texto": "Gosta de animais (principalmente tigres e gatos), inverno, roupas e estilo, academia e tatuagens.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.5595465,
+   "atualizado_em": 1790724132.5595465
+  },
+  {
+   "id": "34b1822d",
+   "texto": "Não gosta de injustiça, desrespeito, falsidade, críticas excessivas, cobranças, pressão, pessoas inconvenientes, ironia para diminuí-lo e música que considera ruim.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.5629745,
+   "atualizado_em": 1790724132.5629745
+  },
+  {
+   "id": "9ecb4db0",
+   "texto": "É sentimental e pode se estressar facilmente; trate com cuidado e sem pressioná-lo.",
+   "tipo": "perfil",
+   "criado_em": 1790724132.56374,
+   "atualizado_em": 1790724132.56374
+  }
+ ]
+}

@@ -4,7 +4,8 @@ name: Build Aurora 0.3 Corrigida
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -28,18 +29,69 @@ jobs:
       - name: Install Android SDK
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            "platforms;android-36" \
+            "build-tools;36.0.0"
 
-      - name: Extract corrected Aurora
+      - name: Extract Aurora 0.3 Corrigida
         run: |
+          set -e
           test -f Aurora-0.3-CORRIGIDA-PATCH.zip
+
           mkdir -p /tmp/aurora-corrigida
-          unzip -q Aurora-0.3-CORRIGIDA-PATCH.zip -d /tmp/aurora-corrigida
+          unzip -q Aurora-0.3-CORRIGIDA-PATCH.zip \
+            -d /tmp/aurora-corrigida
+
           test -f /tmp/aurora-corrigida/gradlew
-          grep -E 'applicationId|versionCode|versionName' /tmp/aurora-corrigida/app/build.gradle.kts
+          test -f /tmp/aurora-corrigida/app/build.gradle.kts
+
+          grep -E 'applicationId|versionCode|versionName' \
+            /tmp/aurora-corrigida/app/build.gradle.kts
+
+      - name: Correct AuroraNotifications imports
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          root = Path("/tmp/aurora-corrigida")
+          matches = list(root.rglob("AuroraNotifications.kt"))
+
+          if len(matches) != 1:
+              raise SystemExit(
+                  f"Esperado 1 AuroraNotifications.kt; encontrados: {len(matches)}"
+              )
+
+          file = matches[0]
+          source = file.read_text(encoding="utf-8")
+
+          imports = [
+              "import android.graphics.drawable.Icon",
+              "import android.content.pm.ShortcutInfo",
+              "import android.content.pm.ShortcutManager",
+          ]
+
+          missing = [item for item in imports if item not in source]
+
+          if missing:
+              lines = source.splitlines()
+              package_index = next(
+                  (i for i, line in enumerate(lines)
+                   if line.startswith("package ")),
+                  None
+              )
+
+              if package_index is None:
+                  raise SystemExit("Declaração package não encontrada.")
+
+              lines[package_index + 1:package_index + 1] = missing
+              file.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+          print(f"Imports verificados em {file}")
+          PY
 
       - name: Build corrected APK
         run: |
+          set -e
           cd /tmp/aurora-corrigida
           chmod +x ./gradlew
           ./gradlew --no-daemon :app:assembleDebug --stacktrace
@@ -51,4 +103,5 @@ jobs:
           path: /tmp/aurora-corrigida/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
+          
           
